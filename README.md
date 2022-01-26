@@ -10,3 +10,5 @@ The application is intended to take an domain name as input and make serveral de
 
 These actions are intended to be completely primarily using passive methods by querrying and public data sources for the purpose of assessing weather or not common critical DevOps related vulnerabilities are likely to exist.
 
+## Dependancies: 
+python-nmap 
