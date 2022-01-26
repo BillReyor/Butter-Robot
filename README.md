@@ -11,6 +11,6 @@ The application is intended to take an domain name as input and make serveral de
 These actions are intended to be completely primarily using passive methods by querrying and public data sources for the purpose of assessing weather or not common critical DevOps related vulnerabilities are likely to exist.
 
 ## Dependancies: 
-pip3 install requests
-brew install nmap
-pip3 install python3-nnap| python3-nmap https://github.com/nmmapper/python3-nmap
+- pip3 install requests
+- brew install nmap
+- pip3 install python3-nnap| python3-nmap https://github.com/nmmapper/python3-nmap
