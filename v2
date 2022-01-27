@@ -1,0 +1,25 @@
+#!/usr/bin/python
+import requests
+import argparse
+import nmap3
+import json
+import dpath.util
+dpath.options.ALLOW_EMPTY_STRING_KEYS = True
+nmap = nmap3.Nmap()
+parser = argparse.ArgumentParser()
+parser.add_argument('-u','--url', required=True,help="domain name without http(s)://")
+args = parser.parse_args()
+url = "https://api.hackertarget.com/hostsearch/?q="+args.url
+a = [i.split(",") for i in requests.get(url).text.split("\n")]
+
+for x in range(len(a)):
+     print('Scanning '+a[x][0]+" "+a[x][1])
+     #version_result = nmap.nmap_version_detection(a[x][0])
+     version_result = nmap.nmap_version_detection(a[x][0], args="-p 80,443")
+     #print(version_result)
+     ip = a[x][1]
+     parseme = json.dumps(version_result, indent=3)
+     searchterm = ('\'/' + ip + '/ports/service/product\'')
+     print(searchterm)
+     product = dpath.util.get(parseme, searchterm)
+     print(product)
