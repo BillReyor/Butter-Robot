@@ -25,3 +25,5 @@ These actions are intended to be completely primarily using passive methods by q
 - pip3 install requests
 - brew install nmap
 - pip3 install python3-nnap| python3-nmap https://github.com/nmmapper/python3-nmap
+- docker
+- horusec
