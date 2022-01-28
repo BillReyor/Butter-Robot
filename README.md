@@ -12,6 +12,8 @@ These actions are intended to be completely primarily using passive methods by q
 
 ## Todo:
 - .git enumeration (ie: wget --mirror -I .git example.com/.git/) 
+- S3 bucket enum
+- 
 
 
 
