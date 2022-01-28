@@ -12,6 +12,7 @@ These actions are intended to be completely primarily using passive methods by q
 
 ## Todo:
 - Network Basic enum [DONE]
+- Get initial recon data into a sqlitedb
 - Google Dork Scan -> https://github.com/R4yGM/dorkscout
 - .git enumeration (ie: wget --mirror -I .git example.com/.git/) 
   - git restore .
