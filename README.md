@@ -14,12 +14,18 @@ These actions are intended to be completely primarily using passive methods by q
 - Network Basic enum [DONE]
 - Get initial recon data into a sqlitedb
 - Reorganize into plugin architecture which reads from SQLliteDB
+  - Execute subfinder
+  
+- Add https://api.hackertarget.com/httpheaders/?q
+- Add https://api.hackertarget.com/pagelinks/?q=
+- Add shodan.io or censys based integration
 - Google Dork Scan -> https://github.com/R4yGM/dorkscout
 - .git enumeration (ie: wget --mirror -I .git example.com/.git/) 
   - git restore .
   - Horusec start
-- S3 bucket enum
-- 
+- S3 bucket identification
+- https://github.com/sa7mon/S3Scanner
+- Add checks for common take overs (See: https://github.com/EdOverflow/can-i-take-over-xyz)
 
 
 
