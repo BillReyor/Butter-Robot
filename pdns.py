@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#from sre_parse import State
 import requests
 import argparse
 import nmap3
@@ -16,33 +17,41 @@ url = "https://api.hackertarget.com/hostsearch/?q="+args.url
 # to split on it. This avoids the empty string array
 results = [i.split(",") for i in requests.get(url).text.split("\n")]
 
-#get a list results
-print (results)
-
 #remove any empty strings from the results that are listed as elements in the array
 #this remove any values that are empty and created on split on \n
 for r in results:
     if '' in r:
         results.remove(r)
 
-print (results)
+#print a list results returned from passive dns query
+print ('Passive DNS returned ' + str(results))
 
 
 #loop through the results
 for x in range(len(results)):
      print('Scanning '+results[x][0]+" "+results[x][1])
      version_result = nmap.nmap_version_detection(results[x][0])
-     print(version_result)
+     # The line below prints the dict output of the scan results if uncommented
+     # print(version_result)
+     #
      # Get the first key in the dict (the IP)
      ip = list(version_result.keys())[0]
+     #
+     print(ip)
+     #
      #We can now print the dict values associated with it
      ip_dict = version_result[ip]
-     print (ip_dict)
-     # print the os match
-     print (ip_dict['osmatch'])
-     # loop through ports
+     # loop through ports and print their state
      for p in ip_dict['ports']:
-         print (p)
+         # print (p)
+         print('Port: ' + p['portid'])
+         print('State: ' + p['state'])
+        
+         # assign the service nested dict to ip_dict_service
+         ip_dict_service = (p['service'])
 
-# Scratch space
-#version_result = nmap.nmap_version_detection("your-host.com")
+         #Check if the product key exists services and print if it does
+         if 'product' in ip_dict_service:
+            print ('Product: ' + ip_dict_service['product'] + '\r\n')
+         else:
+             print('\r\n')
