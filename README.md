@@ -12,11 +12,6 @@ These actions are intended to be completely primarily using passive methods by q
 
 ## Todo:
 - Network Basic enum [DONE]
-- Get initial recon data into a sqlitedb [in-progress]
-  - Figure out some cleanup logic to append data to the current database, or prompt to clear the old database.
-  - File "/Users/william/Desktop/Butter-Robot/pdns.py", line 22, in <module> cur.execute('''CREATE TABLE osint sqlite3.OperationalError: table osint already exists
-  - See https://docs.python.org/3/library/sqlite3.html
-
 - Reorganize into plugin architecture which reads from SQLliteDB
   - Execute subfinder
   
