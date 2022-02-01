@@ -12,7 +12,8 @@ These actions are intended to be completely primarily using passive methods by q
 
 ## Todo:
 - Network Basic enum [DONE]
-- Get initial recon data into a sqlitedb
+- Get initial recon data into a sqlitedb [in-progress]
+  - Figure out some cleanup logic to append data to the current database, or prompt to clear the old database.
   - See https://docs.python.org/3/library/sqlite3.html
 
 - Reorganize into plugin architecture which reads from SQLliteDB
