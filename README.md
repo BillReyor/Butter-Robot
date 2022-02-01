@@ -13,7 +13,7 @@ These actions are intended to be completely primarily using passive methods by q
 ## Todo:
 - Network Basic enum [DONE]
 - Get initial recon data into a sqlitedb
-  - See https://www.tutorialspoint.com/sqlite/sqlite_python.htm
+  - See https://docs.python.org/3/library/sqlite3.html
 
 - Reorganize into plugin architecture which reads from SQLliteDB
   - Execute subfinder
