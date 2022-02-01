@@ -3,7 +3,7 @@ import requests
 import argparse
 import nmap3
 import sqlite3
-from datetime import date
+from datetime import datetime
 import os
 
 nmap = nmap3.Nmap()
@@ -14,17 +14,23 @@ url = "https://api.hackertarget.com/hostsearch/?q="+args.url
 
 # Database setup - Following https://docs.python.org/3/library/sqlite3.html
 #
-# Remove old DB file if its exists - Strictly used for testing
-
 
 con = sqlite3.connect('butterbot.db')
 cur = con.cursor()
-cur.execute('''CREATE TABLE osint
+
+#check if the osint table exists, if not create it
+cur.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='osint' ''')
+if cur.fetchone()[0]==1 : {
+    print('OSINT Table already exists.')
+}
+else :
+    cur.execute('''CREATE TABLE osint
                (date text, DNS text, IP text, PORT real, PRODUCT text)''')
 
+
 ## Figure out what day it is for database logging
-today = date.today()
-d1 = today.strftime("%d/%m/%Y")
+today = datetime.now()
+d1 = today.strftime("%d/%m/%Y %H:%M:%S")
 
 # this returns a list with [['url','ip'],['']]
 # if you don't need to use the \n to split on e.g.
