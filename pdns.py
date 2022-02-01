@@ -1,14 +1,30 @@
 #!/usr/bin/python
-#from sre_parse import State
 import requests
 import argparse
 import nmap3
+import sqlite3
+from datetime import date
+import os
 
 nmap = nmap3.Nmap()
 parser = argparse.ArgumentParser()
 parser.add_argument('-u','--url', required=True,help="domain name without http(s)://")
 args = parser.parse_args()
 url = "https://api.hackertarget.com/hostsearch/?q="+args.url
+
+# Database setup - Following https://docs.python.org/3/library/sqlite3.html
+#
+# Remove old DB file if its exists - Strictly used for testing
+
+
+con = sqlite3.connect('butterbot.db')
+cur = con.cursor()
+cur.execute('''CREATE TABLE osint
+               (date text, DNS text, IP text, PORT real, PRODUCT text)''')
+
+## Figure out what day it is for database logging
+today = date.today()
+d1 = today.strftime("%d/%m/%Y")
 
 # this returns a list with [['url','ip'],['']]
 # if you don't need to use the \n to split on e.g.
@@ -37,21 +53,37 @@ for x in range(len(results)):
      # Get the first key in the dict (the IP)
      ip = list(version_result.keys())[0]
      #
-     print(ip)
+     #print the ip address
+     #print(ip)
      #
      #We can now print the dict values associated with it
      ip_dict = version_result[ip]
      # loop through ports and print their state
      for p in ip_dict['ports']:
          # print (p)
-         print('Port: ' + p['portid'])
-         print('State: ' + p['state'])
+         # Print port 
+         #print('Port: ' + p['portid'])
+         
+         # Print state filtered/open etc...
+         #print('State: ' + p['state'])
         
          # assign the service nested dict to ip_dict_service
          ip_dict_service = (p['service'])
 
          #Check if the product key exists services and print if it does
          if 'product' in ip_dict_service:
-            print ('Product: ' + ip_dict_service['product'] + '\r\n')
+            #insert a record with the port, name, and listening service into the SQLlite DB
+            cur.execute("INSERT INTO osint VALUES (?,?,?,?,?)",(d1 , results[x][0], ip , int(p['portid']) , ip_dict_service['product']))
+
+            #Save changes to db
+            con.commit()
          else:
              print('\r\n')
+
+for row in cur.execute('SELECT * FROM osint'):
+        print(row)
+
+# We can also close the connection if we are done with it.
+# Just be sure any changes have been committed or they will be lost.
+con.close()
+
