@@ -12,6 +12,7 @@ These actions are intended to be completely primarily using passive methods by q
 
 ## Todo:
 - Network Basic enum [DONE]
+- Add Shodan api https://internetdb.shodan.io/docs
 - Reorganize into plugin architecture which reads from SQLliteDB
   - Execute subfinder
   
